@@ -1,3 +1,5 @@
+/* global document, window, setInterval */
+
 document.oncontextmenu = document.body.oncontextmenu = function () {
   return false
 }
