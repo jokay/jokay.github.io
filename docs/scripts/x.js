@@ -20,7 +20,7 @@ for (let i = 0; i < m.width / 16; i++) {
   d[i] = m.height
 }
 
-function x () {
+function x() {
   b.fillStyle = 'rgba(0, 0, 0, 0.05)'
   b.fillRect(0, 0, m.width, m.height)
   b.fillStyle = '#0f0'
