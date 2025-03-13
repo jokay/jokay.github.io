@@ -1,17 +1,23 @@
 document.oncontextmenu = document.body.oncontextmenu = () => false;
 
-const q = document.getElementById('m'),
-  w = q.getContext('2d');
+const q = document.getElementById('m');
+const w = q.getContext('2d');
 
 q.width = window.innerWidth;
 q.height = window.innerHeight;
 
 let e = ' ';
-for (let r = 0; r < 45; r++) e += String.fromCharCode(r + 65393);
+for (let r = 0; r < 45; r++) {
+  e += String.fromCharCode(r + 65393);
+}
 e = e.split('');
 
-const t = Array(Math.floor(q.width / 16)).fill().map(() => Math.floor(Math.random() * -q.height / 16));
-let frameCount = 0, frameDelay = 5;
+const t = Array(Math.floor(q.width / 16))
+  .fill()
+  .map(() => Math.floor(Math.random() * -q.height / 16));
+
+let frameCount = 0;
+const frameDelay = 5;
 
 function y() {
   if (++frameCount % frameDelay === 0) {
@@ -22,11 +28,14 @@ function y() {
 
     t.forEach((u, i) => {
       w.fillText(e[Math.floor(Math.random() * e.length)], i * 16, u * 16);
-      t[i] = u * 16 > q.height && Math.random() > 0.975 ? Math.floor(Math.random() * -q.height / 16) : u + 1;
+      t[i] =
+        u * 16 > q.height && Math.random() > 0.975
+          ? Math.floor(Math.random() * -q.height / 16)
+          : u + 1;
     });
   }
 
-  requestAnimationFrame(y);
+  window.requestAnimationFrame(y);
 }
 
 y();
