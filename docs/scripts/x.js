@@ -1,34 +1,32 @@
-/* global document, window, setInterval */
+document.oncontextmenu = document.body.oncontextmenu = () => false;
 
-document.oncontextmenu = document.body.oncontextmenu = function () {
-  return false
-}
+const q = document.getElementById('m'),
+  w = q.getContext('2d');
 
-const m = document.getElementById('m')
-const b = m.getContext('2d')
-m.height = window.innerHeight
-m.width = window.innerWidth
+q.width = window.innerWidth;
+q.height = window.innerHeight;
 
-let s = ' '
-for (let i = 0; i < 45; i++) {
-  s += String.fromCharCode(i + 65393)
-}
+let e = ' ';
+for (let r = 0; r < 45; r++) e += String.fromCharCode(r + 65393);
+e = e.split('');
 
-s = s.split('')
-const d = []
-for (let i = 0; i < m.width / 16; i++) {
-  d[i] = m.height
-}
+const t = Array(Math.floor(q.width / 16)).fill().map(() => Math.floor(Math.random() * -q.height / 16));
+let frameCount = 0, frameDelay = 5;
 
-function x () {
-  b.fillStyle = 'rgba(0, 0, 0, 0.05)'
-  b.fillRect(0, 0, m.width, m.height)
-  b.fillStyle = '#0f0'
-  b.font = '16px Arial'
-  for (let i = 0; i < d.length; i++) {
-    b.fillText(s[Math.floor(Math.random() * s.length)], i * 16, d[i] * 16)
-    d[i] = d[i] * 16 > m.height && Math.random() > 0.975 ? 0 : d[i] + 1
+function y() {
+  if (++frameCount % frameDelay === 0) {
+    w.fillStyle = 'rgba(0,0,0,0.05)';
+    w.fillRect(0, 0, q.width, q.height);
+    w.fillStyle = '#0f0';
+    w.font = '16px Arial';
+
+    t.forEach((u, i) => {
+      w.fillText(e[Math.floor(Math.random() * e.length)], i * 16, u * 16);
+      t[i] = u * 16 > q.height && Math.random() > 0.975 ? Math.floor(Math.random() * -q.height / 16) : u + 1;
+    });
   }
+
+  requestAnimationFrame(y);
 }
 
-setInterval(x, 90)
+y();

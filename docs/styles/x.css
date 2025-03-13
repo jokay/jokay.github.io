@@ -1,11 +1,13 @@
 body {
-  background-color: #000;
+  background: #000;
   margin: 0;
   padding: 0;
   user-select: none;
+  overflow: hidden;
 }
-
 canvas {
   display: block;
-  z-index: -1;
+  position: absolute;
+  top: 0;
+  left: 0;
 }
